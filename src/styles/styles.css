@@ -14,6 +14,19 @@ article {
 :root {
     --min-width: 15rem;
     --header-height: 3rem;
+
+    --large-padding: 1rem;
+
+    --text: white;
+    --background: blue;
+    --logo-button:  rgba(200, 10, 10, 0.7);
+    --background-fade: rgba(0,0,0,0.3);
+
+    --foreground-fade: rgba(255,255,255,0.3);
+    --accent-text: black;
+    --button: gray;
+
+    --small-padding: calc(var(--large-padding) / 2);
 }
 
 * {
@@ -34,7 +47,9 @@ body {
     margin: 0 auto;
     display: grid;
     grid-template-rows: var(--header-height) auto var(--header-height);
-  }
+    color: var(--text);
+    background-color: var(--background);
+}
 
   body>main {
     min-width: var(--min-width);
@@ -53,4 +68,91 @@ body {
   
   body>footer {
     grid-row: 3;
+  }
+
+  body>header,
+  body>footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  padding: var(--large-padding);
+}
+
+body > footer {
+    justify-content: center;
+}
+
+a,
+a:hover,
+a:visited {
+  color: var(--text);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body > header > a {
+    background-color: var(--logo-button);
+    height: calc(var(--header-height) / 2);
+    padding: var(--large-padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body>header,
+  body>footer {
+    background-color: var(--background-fade);
+  }
+
+  section.hero {
+    min-height: var(--hero-height);
+    padding: var(--large-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    color: var(--accent-text);
+    position:relative;
+  }
+
+  section.hero > * {
+    background-color: var(--foreground-fade);
+    padding: var(--large-padding);
+    min-width: calc(
+      var(--min-width) - 4 * var(--large-padding)
+    ); /* 30rem - 2x( 1rem main padding + 1rem   section padding )*/
+  }
+
+  section.hero footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  section.hero footer a {
+    text-transform: uppercase;
+    background-color: var(--button);
+    padding: var(--small-padding);
+    border-radius: calc(var(--small-padding) / 2);
+  }
+
+  section.hero::before {
+    content: "";
+    z-index: -1;
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: var(--hero-splash-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  section.hero.full::before {
+    position: fixed;
   }
